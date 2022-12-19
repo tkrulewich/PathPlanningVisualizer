@@ -340,12 +340,14 @@ class Grid:
                         # if the neighbor is valid and it is not our current node
                         if (neighbor is not current_node and neighbor not in visited and self.node_valid(neighbor)):
                             # update the cost if its less than previous cost
-                            if (use_heuristic):
-                                cost = current_node.cost + current_node.distance(neighbor)
-                            else:
-                                cost = current_node.cost + current_node.distance(neighbor) + neighbor.heruistic
+                            cost = current_node.cost + current_node.distance(neighbor)
+                            
                             if (cost < neighbor.cost):
-                                reduced.put((cost + neighbor.heruistic, neighbor))
+                                if use_heuristic:
+                                    reduced.put((cost + neighbor.heruistic, neighbor))
+                                else:
+                                    reduced.put((cost, neighbor))
+                                
                                 neighbor.cost = cost
                                 neighbor.parent_node = current_node
                                 

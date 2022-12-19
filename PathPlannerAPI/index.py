@@ -205,4 +205,5 @@ if __name__ == "__main__":
     # allow non-localhost requests
     os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
     CORS(app)
-    app.run(host="192.168.86.92", port=8000, debug=False)
+    app.run(host="edwardkrulewich.com", port=8000, debug=False, ssl_context=('/etc/letsencrypt/live/edwardkrulewich.com/fullchain.pem', '/etc/letsencrypt/live/edwardkrulewich.com/privkey.pem'))
+
