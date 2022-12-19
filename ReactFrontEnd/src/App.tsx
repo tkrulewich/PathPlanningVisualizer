@@ -39,7 +39,7 @@ const App: React.FC = () => {
 
   const getGridVideo = () => {
         // fetch the JSON Object with POST
-        fetch('http://192.168.86.92:8000/find_path', {
+        fetch('https://edwardkrulewich.com:8000/find_path', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const App: React.FC = () => {
 
   const getGridImage = () => {
       // fetch the JSON Object with POST
-      fetch('http://192.168.86.92:8000/make_grid', {
+      fetch('https://edwardkrulewich.com:8000/make_grid', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,13 +100,13 @@ const App: React.FC = () => {
               <Form>
                 <Form.Group controlId="gridSizeControls">
                   <Form.Label>Grid Width: {gridWidth} </Form.Label>
-                  <Form.Control type="range" min={25} max={75} onChange={(e) => setGridWidth(Number(e.target.value))} />
+                  <Form.Control type="range" min={25} max={75} defaultValue={gridWidth} onChange={(e) => setGridWidth(Number(e.target.value))} />
 
                   <Form.Label>Grid Height: {gridHeight} </Form.Label>
-                  <Form.Control type="range" min={25} max={75} onChange={(e) => setGridHeight(Number(e.target.value))} />
+                  <Form.Control type="range" min={25} max={75} defaultValue={gridHeight} onChange={(e) => setGridHeight(Number(e.target.value))} />
 
                   <Form.Label>Number of Obstacles: {numObstacles} </Form.Label>
-                  <Form.Control type="range" min={10} max={75} onChange={(e) => setNumObstacles(Number(e.target.value))} />
+                  <Form.Control type="range" min={10} max={75} defaultValue={numObstacles} onChange={(e) => setNumObstacles(Number(e.target.value))} />
 
                   <Form.Label>Algorithm: </Form.Label>
                   <Form.Control as="select" onChange={(e) => setAlgorithm(e.target.value)}>
