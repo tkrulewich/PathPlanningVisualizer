@@ -7,8 +7,6 @@ import matplotlib.animation
 from flask import Flask, request, render_template
 from PathPlanning import Grid, Obstacle
 from time import time
-
-from flask_cors import CORS
 from io import BytesIO
 
 app = Flask(__name__)
@@ -200,10 +198,4 @@ def make_grid():
 
 
 if __name__ == "__main__":
-    # use http instead of https
-    # allow cross origin requests
-    # allow non-localhost requests
-    os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
-    CORS(app)
-    app.run(host="edwardkrulewich.com", port=8000, debug=False, ssl_context=('/etc/letsencrypt/live/edwardkrulewich.com/fullchain.pem', '/etc/letsencrypt/live/edwardkrulewich.com/privkey.pem'))
-
+    app.run(debug=True)
