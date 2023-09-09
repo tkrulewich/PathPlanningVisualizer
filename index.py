@@ -2,14 +2,21 @@ import os
 import random
 import base64
 import json
-import matplotlib.pyplot as plt
+
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
+
+
 import matplotlib.animation
 from flask import Flask, request, render_template
+from flask_cors import CORS
 from PathPlanning import Grid, Obstacle
 from time import time
 from io import BytesIO
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/find_path", methods=["POST"])
 def find_path():
@@ -69,32 +76,25 @@ def find_path():
 
     ax = plt.gca().set_aspect('equal', adjustable='box')
 
-    # set the background to dark grey
-
-    ax = fig.set_facecolor('#282c34')
-
-    # make tick color white
-
-    plt.tick_params(axis='x', colors='white')
-    plt.tick_params(axis='y', colors='white')
+    ax = fig.set_facecolor('#f8f9fa')
 
     def update(frame):
         path_line.set_data(x[:frame], y[:frame])
         return path_line,
 
-    anim = matplotlib.animation.FuncAnimation(fig, update, frames=range(0, len(x)+1, 4),blit=True, interval=50)
+    anim = matplotlib.animation.FuncAnimation(fig, update, frames=range(0, len(x)+1, 1),blit=True, interval=50)
 
     # save the animation as an mp4 but speed up the fps
 
     # random filename
 
 
-    filename = "static/" + str(random.randint(0, 1000000)) + ".mp4"
+    filename = "static/" + str(random.randint(0, 1000000)) + ".gif"
 
     while os.path.exists(filename):
-        filename = "static/" + str(random.randint(0, 1000000)) + ".mp4"
+        filename = "static/" + str(random.randint(0, 1000000)) + ".gif"
 
-    anim.save(filename, fps=12, extra_args=['-vcodec', 'libx264',])
+    anim.save(filename, writer="imagemagick", fps=8)
 
     #load the video file into memory
 
@@ -167,14 +167,7 @@ def make_grid():
 
     ax = plt.gca().set_aspect('equal', adjustable='box')
 
-    # set the background to dark grey
-
-    ax = fig.set_facecolor('#282c34')
-
-    # make tick color white
-
-    plt.tick_params(axis='x', colors='white')
-    plt.tick_params(axis='y', colors='white')
+    ax = fig.set_facecolor('#f8f9fa')
 
     # save the figure as a png into buffer
 
@@ -196,6 +189,5 @@ def make_grid():
     return json.dumps(data)
 
 
-
-if __name__ == "__main__":
-    app.run(debug=True)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')

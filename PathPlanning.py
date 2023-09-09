@@ -278,6 +278,8 @@ class Grid:
 
         seen = set()
 
+        visited_tree.append(end)
+
         for node in visited_tree:
             x_list = []
             y_list = []
@@ -290,12 +292,15 @@ class Grid:
 
                 node = node.parent_node
             else:
-                plt.plot(x_list, y_list, color="green", linewidth=0.5)
+                plt.plot(x_list, y_list, color="green", linewidth=0.5, marker=None, linestyle="solid")
                 tree_lines.append((x_list, y_list))
         
         # will store x and y coordinates of nodes in path
         x_list = []
         y_list = []
+
+        x_list.append(end.x)
+        y_list.append(end.y)
 
         # start from the end node and work backwars to the start node
         current_node = min(visited_tree, key=lambda x: x.distance(end))
