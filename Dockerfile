@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 # run the application
-ENTRYPOINT ["python", "index.py"]
+ENTRYPOINT ["gunicorn", "--timeout", "600", "--access-logfile", "'-'", "--error-logfile", "'-'", "--chdir=/opt/defaultsite", "index:app"]
