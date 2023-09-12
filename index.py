@@ -16,7 +16,7 @@ from time import time
 from io import BytesIO
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 @app.route("/find_path", methods=["POST"])
 def find_path():
@@ -190,4 +190,4 @@ def make_grid():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000, debug=True)
