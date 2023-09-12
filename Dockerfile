@@ -27,4 +27,4 @@ EXPOSE 5000
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "index.py"]
+ENTRYPOINT ["python", "index.py"]
